@@ -1,0 +1,41 @@
+name: datamentor
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.1+2
+
+environment:
+  sdk: ^3.11.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  shared_preferences: ^2.2.2
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+  flutter_lints: ^6.0.0
+
+# ✅ MUST BE HERE (TOP LEVEL)
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/datamentor_logo.png"
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/excel_interface.png
+    - assets/images/excel_sort_filter.png
+    - assets/images/excel_pivot_table.png
+    - assets/images/excel_chart.png
+    - assets/images/excel_dashboard.png
+    - assets/images/powerbi_interface.png
+    - assets/images/powerquery.png
+    - assets/images/tableau_interface.png
+    - assets/images/tableau_dashboard.png
+    - assets/images/datamentor_logo.png
