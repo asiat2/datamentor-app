@@ -797,49 +797,34 @@ class _CoursePageState extends State<CoursePage> {
 
   // ✅ MOVE IT HERE
   List<String> get lessons {
-    final list = lessonContent[widget.title]!.keys.toList();
+    final courseData = lessonContent[widget.title];
 
+    // ✅ Handle null safely
+    if (courseData == null) {
+      print("Course NOT found: ${widget.title}");
+      return [];
+    }
+
+    final list = courseData.keys.toList();
+
+    // ✅ Safe sorting
     list.sort((a, b) {
-      final aNum = int.parse(a.split(" ")[1]);
-      final bNum = int.parse(b.split(" ")[1]);
-      return aNum.compareTo(bNum);
+      try {
+        final aNum = int.parse(a.split(" ")[1]);
+        final bNum = int.parse(b.split(" ")[1]);
+        return aNum.compareTo(bNum);
+      } catch (e) {
+        return 0; // fallback if parsing fails
+      }
     });
 
     return list;
   }
-  //   List<String> get lessons {
-  //   return lessonContent[widget.title]!.keys.toList();
-  // }
-  // final Map<String, List<String>> courseLessons = {
-  //   "Excel for Data Analysis": [
-  //     "Lesson 1 — What is Excel",
-  //     "Lesson 2 — Excel Interface",
-  //     "Lesson 3 — Basic Formulas",
-  //   ],
-  //   "SQL for Data Analysts": [
-  //     "Lesson 1 — What is SQL",
-  //     "Lesson 2 — SELECT Statement",
-  //     "Lesson 3 — WHERE Clause",
-  //   ],
-  //   "Python for Data Analysis": [
-  //     "Lesson 1 — Introduction to Python",
-  //     "Lesson 2 — Variables & Data Types",
-  //     "Lesson 3 — Lists & Dictionaries",
-  //   ],
-  //   "Power BI Dashboards": [
-  //     "Lesson 1 — What is Power BI",
-  //     "Lesson 2 — Power BI Interface",
-  //     "Lesson 3 — Creating Visuals",
-  //   ],
-  //   "Tableau Visualization": [
-  //     "Lesson 1 — What is Tableau",
-  //     "Lesson 2 — Tableau Interface",
-  //     "Lesson 3 — Building Dashboards",
-  //   ],
-  // };
 
   @override
   Widget build(BuildContext context) {
+    print("Course: ${widget.title}"); // ✅ RIGHT PLACE
+
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
 
@@ -848,13 +833,13 @@ class _CoursePageState extends State<CoursePage> {
           // 🔥 PROGRESS BAR
           FutureBuilder(
             future: getCompletedCount(
-              lessonContent[widget.title]!.keys.toList(),
+              lessonContent[widget.title]?.keys.toList() ?? [],
             ),
             builder: (context, snapshot) {
               if (!snapshot.hasData) return SizedBox();
 
-              int completed = snapshot.data!;
-              int total = lessonContent[widget.title]!.length;
+            int completed = snapshot.data ?? 0;
+            int total = lessonContent[widget.title]?.length ?? 0;
 
               double progress = completed / total;
 
@@ -1021,7 +1006,8 @@ class _LessonPageState extends State<LessonPage> {
 
   @override
   Widget build(BuildContext context) {
-    final lessonData = lessonContent[widget.course]?[widget.lesson];
+    final courseData = lessonContent[widget.course];
+    final lessonData = courseData != null ? courseData[widget.lesson] : null;
 
     final content = lessonData != null && lessonData["content"] != null
         ? lessonData["content"]
