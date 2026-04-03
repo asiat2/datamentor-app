@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "375000587276",
+    "project_id": "datamentor-c616b",
+    "storage_bucket": "datamentor-c616b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375000587276:android:540d12a497582c09f86229",
+        "android_client_info": {
+          "package_name": "com.asiat.datamentor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLgKerDE-sc3YTeJNoirqiVMN3KAEs9gc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
